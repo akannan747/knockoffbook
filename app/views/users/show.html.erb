@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+<h1><%= "#{@user.to_string}'s profile page" %></h1>
+ 
+<h2><%= "News feed:" %></h2>
+<% @feed_posts.each do |post| %>
+  <p>
+    <h3><%= post.title %></h3>
+    <p><%= post.content %></p>
+    <p>&emsp;--<%= "Posted by #{post.user.to_string} on #{post.created_at_string}" %></p>
+    <% if @session_user.id == post.user_id %>
+      <p>
+        -- 
+        <%= link_to 'Edit', edit_post_path(post) %> 
+        --
+        <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %> 
+        --
+      </p>
+    <% end %>
+  </p>
+<% end %>
+
+<% if @session_user.id == @user.id %>
+  <h2>Your friends:</h2>
+  <% @user.users.each do |friend| %>
+    <p>
+      <%= link_to friend.to_string, friend %>
+    </p>
+  <% end %>
+<% end %>
+
+<% if @session_user.id == @user.id %>
+  <%= link_to 'New Post', new_post_path %> |
+  <%= link_to 'Edit Profile', edit_user_path(@user) %> |
+  <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %> |
+<% elsif !@session_user.users.include?(@user) %>
+  <%= link_to "Add Friend", add_friend_users_path %>|
+<% end %>
+<% if @session_user.id != @user.id %>
+  <%= link_to "My Profile", @session_user %> |
+<% end %>
+<%= link_to "Home Page", users_path %> |
+<%= link_to "Log out", logout_path %>
