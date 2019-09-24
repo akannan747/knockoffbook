@@ -2,10 +2,13 @@
 <h1>Welcome to Knockoff Facebook!</h1>
 <% if current_user %>
   Logged in as <%= current_user.user_name %>.
-  <%= button_to "Log out", logout_path, :method => 'get' %>
+  <p><%= button_to "Home Page", users_path, :method => 'get' %></p>
+  <p><%= button_to "Log out", logout_path, :method => 'get' %></p>
 <% else %>
-  <%= button_to "Log in", login_path, :method => 'get' %> <br>
-  &nbsp;For new users, <br><br>
-  <%= button_to "Sign up", signup_path, :method => 'get' %>
+  <p><%= button_to "Log in", login_path, :method => 'get' %></p>
+  <p>
+    &nbsp;For new users, <br><br>
+    <%= button_to "Sign up", signup_path, :method => 'get' %>
+  </p>
 <% end %>
 
