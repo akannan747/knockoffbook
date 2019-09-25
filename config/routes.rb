@@ -3,7 +3,8 @@ Rails.application.routes.draw do
 
   resources :users do
     collection do 
-      get 'add_friend/:id', to: 'users#add_friend', as: 'add_friend'
+      get 'add_friend/:id', to: 'users#send_friend_request', as: 'add_friend'
+      get 'accept_friend', to: 'users#accept_friend_request', as: 'accept_friend'
     end
   end
   resources :sessions, only: [:new, :create, :destroy]

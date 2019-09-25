@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :add_friend]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :send_friend_request]
   before_action :set_session_user
 
   # GET /users
@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @feed_posts = (@user.users.map{|u| u.posts}.flatten + @user.posts)
+    @feed_posts = (@user.friends.map{|u| u.posts}.flatten + @user.posts)
     @feed_posts.sort_by! {|post| post.created_at}.reverse! 
   end
 
@@ -73,9 +73,9 @@ class UsersController < ApplicationController
     end
   end
 
-  def add_friend
-    @session_user.users.push(@user)
-    redirect_to @session_user
+  def send_friend_request
+    FriendRequest.create(sender_id: @session_user.id, user_id: @user.id)
+    redirect_to @session_user, notice: 'Friend request sent!'
   end
 
   private
@@ -86,7 +86,11 @@ class UsersController < ApplicationController
 
     # Get session id information.
     def set_session_user
-      @session_user = User.find(session[:user_id])
+      if session[:user_id]
+        @session_user ||= User.find(session[:user_id])
+      else
+        @session_user = nil
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

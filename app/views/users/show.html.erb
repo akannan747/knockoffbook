@@ -21,10 +21,12 @@
 
 <% if @session_user.id == @user.id %>
   <h2>Your friends:</h2>
-  <% @user.users.each do |friend| %>
-    <p>
-      <%= link_to friend.to_string, friend %>
-    </p>
+  <% @user.friends.each do |friend| %>
+    <p><%= link_to friend.to_string, friend %></p>
+  <% end %>
+  <h2>Your friend requests:</h2>
+  <% @user.friend_requests.each do |request| %>
+    <p><%= request.sender.to_string %></p>
   <% end %>
 <% end %>
 
@@ -32,7 +34,7 @@
   <%= link_to 'New Post', new_post_path %> |
   <%= link_to 'Edit Profile', edit_user_path(@user) %> |
   <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %> |
-<% elsif !@session_user.users.include?(@user) %>
+<% elsif !@session_user.friends.include?(@user) %>
   <%= link_to "Add Friend", add_friend_users_path %>|
 <% end %>
 <% if @session_user.id != @user.id %>
