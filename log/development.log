@@ -6010,3 +6010,2558 @@ Processing by UsersController#show as HTML
 Completed 200 OK in 109ms (Views: 31.8ms | ActiveRecord: 2.3ms | Allocations: 21538)
 
 
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateFriendRequests (20190925154908)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "friend_requests" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "sender_id" integer, "recipient_id" integer)[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190925154908"]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+Migrating to ChangeRecipientToUserInFriendRequests (20190925155911)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "afriend_requests" ("id" integer NOT NULL PRIMARY KEY, "sender_id" integer DEFAULT NULL, "user_id" integer DEFAULT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "afriend_requests" ("id","sender_id","user_id")
+                     SELECT "id","sender_id","recipient_id" FROM "friend_requests"[0m
+  [1m[35m (0.8ms)[0m  [1m[35mDROP TABLE "friend_requests"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "friend_requests" ("id" integer NOT NULL PRIMARY KEY, "sender_id" integer DEFAULT NULL, "user_id" integer DEFAULT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "friend_requests" ("id","sender_id","user_id")
+                     SELECT "id","sender_id","user_id" FROM "afriend_requests"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "afriend_requests"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mprimary::SchemaMigration Create (1.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190925155911"]]
+  [1m[35m (1.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2019-09-25 11:19:18 -0500
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 3.4ms | Allocations: 2409)
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 0.0ms | Allocations: 4570)
+
+
+  
+SyntaxError (/Users/classifieddatabank/Development/code/fb/app/models/user.rb:7: syntax error, unexpected ',', expecting ')'
+...and_belongs_to_many ( :friends,
+...                              ^
+/Users/classifieddatabank/Development/code/fb/app/models/user.rb:8: syntax error, unexpected ',', expecting end
+...      :join_table => "friends",
+...                              ^
+/Users/classifieddatabank/Development/code/fb/app/models/user.rb:9: syntax error, unexpected ',', expecting end
+...   :foreign_key => "user_a_id",
+...                              ^
+/Users/classifieddatabank/Development/code/fb/app/models/user.rb:10: syntax error, unexpected ',', expecting end
+...ion_foreign_key => "user_b_id",
+...                              ^
+/Users/classifieddatabank/Development/code/fb/app/models/user.rb:11: syntax error, unexpected ')', expecting end
+...        :class_name => "User" )
+...                              ^):
+  
+app/models/user.rb:7: syntax error, unexpected ',', expecting ')'
+app/models/user.rb:8: syntax error, unexpected ',', expecting end
+app/models/user.rb:9: syntax error, unexpected ',', expecting end
+app/models/user.rb:10: syntax error, unexpected ',', expecting end
+app/models/user.rb:11: syntax error, unexpected ')', expecting end
+app/models/user.rb:7: syntax error, unexpected ',', expecting ')'
+app/models/user.rb:8: syntax error, unexpected ',', expecting end
+app/models/user.rb:9: syntax error, unexpected ',', expecting end
+app/models/user.rb:10: syntax error, unexpected ',', expecting end
+app/models/user.rb:11: syntax error, unexpected ')', expecting end
+app/models/user.rb:7: syntax error, unexpected ',', expecting ')'
+app/models/user.rb:8: syntax error, unexpected ',', expecting end
+app/models/user.rb:9: syntax error, unexpected ',', expecting end
+app/models/user.rb:10: syntax error, unexpected ',', expecting end
+app/models/user.rb:11: syntax error, unexpected ')', expecting end
+app/controllers/application_controller.rb:6:in `current_user'
+app/views/home/index.html.erb:3
+Started GET "/" for ::1 at 2019-09-25 11:20:10 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 1.2ms | Allocations: 1381)
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms | Allocations: 2017)
+
+
+  
+SyntaxError (/Users/classifieddatabank/Development/code/fb/app/models/user.rb:7: syntax error, unexpected ',', expecting ')'
+...and_belongs_to_many ( :friends,
+...                              ^
+/Users/classifieddatabank/Development/code/fb/app/models/user.rb:8: syntax error, unexpected ',', expecting end
+  :join_table => "friends",
+                          ^
+/Users/classifieddatabank/Development/code/fb/app/models/user.rb:9: syntax error, unexpected ',', expecting end
+  :foreign_key => "user_a_id",
+                             ^
+/Users/classifieddatabank/Development/code/fb/app/models/user.rb:10: syntax error, unexpected ',', expecting end
+...ion_foreign_key => "user_b_id",
+...                              ^
+/Users/classifieddatabank/Development/code/fb/app/models/user.rb:11: syntax error, unexpected ')', expecting end
+  :class_name => "User" )
+                        ^):
+  
+app/models/user.rb:7: syntax error, unexpected ',', expecting ')'
+app/models/user.rb:8: syntax error, unexpected ',', expecting end
+app/models/user.rb:9: syntax error, unexpected ',', expecting end
+app/models/user.rb:10: syntax error, unexpected ',', expecting end
+app/models/user.rb:11: syntax error, unexpected ')', expecting end
+app/models/user.rb:7: syntax error, unexpected ',', expecting ')'
+app/models/user.rb:8: syntax error, unexpected ',', expecting end
+app/models/user.rb:9: syntax error, unexpected ',', expecting end
+app/models/user.rb:10: syntax error, unexpected ',', expecting end
+app/models/user.rb:11: syntax error, unexpected ')', expecting end
+app/models/user.rb:7: syntax error, unexpected ',', expecting ')'
+app/models/user.rb:8: syntax error, unexpected ',', expecting end
+app/models/user.rb:9: syntax error, unexpected ',', expecting end
+app/models/user.rb:10: syntax error, unexpected ',', expecting end
+app/models/user.rb:11: syntax error, unexpected ')', expecting end
+app/controllers/application_controller.rb:6:in `current_user'
+app/views/home/index.html.erb:3
+Started GET "/" for ::1 at 2019-09-25 11:20:54 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 1.2ms | Allocations: 1373)
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms | Allocations: 2001)
+
+
+  
+SyntaxError (/Users/classifieddatabank/Development/code/fb/app/models/user.rb:7: syntax error, unexpected ',', expecting ')'
+..._and_belongs_to_many (:friends, :join_table => "friends", :f...
+...                              ^
+/Users/classifieddatabank/Development/code/fb/app/models/user.rb:7: syntax error, unexpected ',', expecting end
+...ends, :join_table => "friends", :foreign_key => "user_a_id",...
+...                              ^
+/Users/classifieddatabank/Development/code/fb/app/models/user.rb:7: syntax error, unexpected ',', expecting end
+...", :foreign_key => "user_a_id", :association_foreign_key => ...
+...                              ^
+/Users/classifieddatabank/Development/code/fb/app/models/user.rb:7: syntax error, unexpected ',', expecting end
+...ion_foreign_key => "user_b_id", :class_name => "User" )
+...                              ^
+/Users/classifieddatabank/Development/code/fb/app/models/user.rb:7: syntax error, unexpected ')', expecting end
+..._b_id", :class_name => "User" )
+...                              ^):
+  
+app/models/user.rb:7: syntax error, unexpected ',', expecting ')'
+app/models/user.rb:7: syntax error, unexpected ',', expecting end
+app/models/user.rb:7: syntax error, unexpected ',', expecting end
+app/models/user.rb:7: syntax error, unexpected ',', expecting end
+app/models/user.rb:7: syntax error, unexpected ')', expecting end
+app/models/user.rb:7: syntax error, unexpected ',', expecting ')'
+app/models/user.rb:7: syntax error, unexpected ',', expecting end
+app/models/user.rb:7: syntax error, unexpected ',', expecting end
+app/models/user.rb:7: syntax error, unexpected ',', expecting end
+app/models/user.rb:7: syntax error, unexpected ')', expecting end
+app/models/user.rb:7: syntax error, unexpected ',', expecting ')'
+app/models/user.rb:7: syntax error, unexpected ',', expecting end
+app/models/user.rb:7: syntax error, unexpected ',', expecting end
+app/models/user.rb:7: syntax error, unexpected ',', expecting end
+app/models/user.rb:7: syntax error, unexpected ')', expecting end
+app/controllers/application_controller.rb:6:in `current_user'
+app/views/home/index.html.erb:3
+Started GET "/" for ::1 at 2019-09-25 11:21:06 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6:in `current_user'
+  Rendered home/index.html.erb within layouts/application (Duration: 38.1ms | Allocations: 10047)
+Completed 200 OK in 1664ms (Views: 1662.0ms | ActiveRecord: 1.2ms | Allocations: 1348471)
+
+
+Started GET "/" for ::1 at 2019-09-25 11:21:32 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6:in `current_user'
+  Rendered home/index.html.erb within layouts/application (Duration: 15.5ms | Allocations: 8395)
+Completed 200 OK in 28ms (Views: 25.8ms | ActiveRecord: 1.2ms | Allocations: 16886)
+
+
+Started GET "/users" for ::1 at 2019-09-25 11:21:37 -0500
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:89:in `set_session_user'
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:5
+  Rendered users/index.html.erb within layouts/application (Duration: 2.7ms | Allocations: 1082)
+Completed 200 OK in 19ms (Views: 15.8ms | ActiveRecord: 0.3ms | Allocations: 10623)
+
+
+Started GET "/users/6" for ::1 at 2019-09-25 11:21:41 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:84:in `set_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:89:in `set_session_user'
+Completed 500 Internal Server Error in 14ms (ActiveRecord: 0.4ms | Allocations: 4406)
+
+
+  
+NoMethodError (undefined method `users' for #<User:0x00007fd90bd53f18>):
+  
+app/controllers/users_controller.rb:14:in `show'
+Started GET "/users/6" for ::1 at 2019-09-25 11:22:04 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:84:in `set_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:89:in `set_session_user'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 6]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 4]]
+  ↳ app/controllers/users_controller.rb:14:in `flatten'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 6]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mFriendRequest Load (0.4ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ?[0m  [["user_id", 6]]
+  ↳ app/views/users/show.html.erb:30
+  Rendered users/show.html.erb within layouts/application (Duration: 9.3ms | Allocations: 3836)
+Completed 200 OK in 60ms (Views: 19.8ms | ActiveRecord: 3.5ms | Allocations: 31672)
+
+
+Started GET "/users" for ::1 at 2019-09-25 11:22:16 -0500
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:89:in `set_session_user'
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:5
+  Rendered users/index.html.erb within layouts/application (Duration: 2.8ms | Allocations: 804)
+Completed 200 OK in 37ms (Views: 33.5ms | ActiveRecord: 0.6ms | Allocations: 9683)
+
+
+Started GET "/users/7" for ::1 at 2019-09-25 11:22:17 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:84:in `set_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:89:in `set_session_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 7]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mUser Exists? (1.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ? AND "users"."id" = ? LIMIT ?[0m  [["user_a_id", 6], ["id", 7], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:39
+  Rendered users/show.html.erb within layouts/application (Duration: 6.4ms | Allocations: 1172)
+Completed 200 OK in 37ms (Views: 25.4ms | ActiveRecord: 2.5ms | Allocations: 11989)
+
+
+Started GET "/users/add_friend/7" for ::1 at 2019-09-25 11:22:19 -0500
+Processing by UsersController#send_friend_request as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:89:in `set_session_user'
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.2ms | Allocations: 1536)
+
+
+  
+NoMethodError (undefined method `id' for nil:NilClass):
+  
+app/controllers/users_controller.rb:77:in `send_friend_request'
+Started GET "/users/add_friend/7" for ::1 at 2019-09-25 11:23:21 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#send_friend_request as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:84:in `set_user'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:89:in `set_session_user'
+Completed 500 Internal Server Error in 26ms (ActiveRecord: 1.4ms | Allocations: 12689)
+
+
+  
+NoMethodError (undefined method `has_a' for FriendRequest(id: integer, sender_id: integer, user_id: integer):Class
+Did you mean?  hash
+               Hash):
+  
+app/models/friend_request.rb:3:in `<class:FriendRequest>'
+app/models/friend_request.rb:1:in `<main>'
+app/controllers/users_controller.rb:77:in `send_friend_request'
+Started GET "/users/add_friend/7" for ::1 at 2019-09-25 11:23:47 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#send_friend_request as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:84:in `set_user'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:89:in `set_session_user'
+Completed 500 Internal Server Error in 34ms (ActiveRecord: 1.9ms | Allocations: 12772)
+
+
+  
+NoMethodError (undefined method `has_a' for FriendRequest(id: integer, sender_id: integer, user_id: integer):Class
+Did you mean?  hash
+               Hash):
+  
+app/models/friend_request.rb:3:in `<class:FriendRequest>'
+app/models/friend_request.rb:1:in `<main>'
+app/controllers/users_controller.rb:77:in `send_friend_request'
+Started GET "/users/add_friend/7" for ::1 at 2019-09-25 11:24:13 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#send_friend_request as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:84:in `set_user'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:89:in `set_session_user'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:77:in `send_friend_request'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:77:in `send_friend_request'
+  [1m[36mFriendRequest Create (0.4ms)[0m  [1m[32mINSERT INTO "friend_requests" ("sender_id", "user_id") VALUES (?, ?)[0m  [["sender_id", 6], ["user_id", 7]]
+  ↳ app/controllers/users_controller.rb:77:in `send_friend_request'
+  [1m[35m (1.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:77:in `send_friend_request'
+Redirected to http://localhost:3000/users/6
+Completed 302 Found in 33ms (ActiveRecord: 3.6ms | Allocations: 15763)
+
+
+Started GET "/users/6" for ::1 at 2019-09-25 11:24:13 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:84:in `set_user'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:89:in `set_session_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 6]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 4]]
+  ↳ app/controllers/users_controller.rb:14:in `flatten'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 6]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mFriendRequest Load (0.3ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ?[0m  [["user_id", 6]]
+  ↳ app/views/users/show.html.erb:30
+  Rendered users/show.html.erb within layouts/application (Duration: 4.9ms | Allocations: 1891)
+Completed 200 OK in 39ms (Views: 19.3ms | ActiveRecord: 1.9ms | Allocations: 19565)
+
+
+Started GET "/users" for ::1 at 2019-09-25 11:24:20 -0500
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:89:in `set_session_user'
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:5
+  Rendered users/index.html.erb within layouts/application (Duration: 3.0ms | Allocations: 804)
+Completed 200 OK in 29ms (Views: 23.6ms | ActiveRecord: 1.7ms | Allocations: 9683)
+
+
+Started GET "/users/7" for ::1 at 2019-09-25 11:24:21 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:84:in `set_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:89:in `set_session_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 7]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.7ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ? AND "users"."id" = ? LIMIT ?[0m  [["user_a_id", 6], ["id", 7], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:39
+  Rendered users/show.html.erb within layouts/application (Duration: 3.2ms | Allocations: 1104)
+Completed 200 OK in 74ms (Views: 59.2ms | ActiveRecord: 1.6ms | Allocations: 11927)
+
+
+Started GET "/logout" for ::1 at 2019-09-25 11:24:32 -0500
+Processing by SessionsController#destroy as HTML
+Redirected to http://localhost:3000/
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms | Allocations: 372)
+
+
+Started GET "/" for ::1 at 2019-09-25 11:24:32 -0500
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.7ms | Allocations: 148)
+Completed 200 OK in 25ms (Views: 22.7ms | ActiveRecord: 0.0ms | Allocations: 8694)
+
+
+Started GET "/signup" for ::1 at 2019-09-25 11:24:34 -0500
+Processing by UsersController#new as HTML
+Completed 404 Not Found in 2ms (ActiveRecord: 0.0ms | Allocations: 658)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  
+app/controllers/users_controller.rb:89:in `set_session_user'
+Started GET "/signup" for ::1 at 2019-09-25 11:25:17 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (Duration: 11.4ms | Allocations: 3531)
+  Rendered users/new.html.erb within layouts/application (Duration: 12.8ms | Allocations: 3896)
+Completed 200 OK in 51ms (Views: 34.1ms | ActiveRecord: 1.7ms | Allocations: 23343)
+
+
+Started POST "/users" for ::1 at 2019-09-25 11:25:28 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"authenticity_token"=>"W1k8mXCLXYpljwcPNRhOIyUq/pqrDxKVw+kwHt/t3hgHULM1cIAYrDL7jHTe1q1MEiitEejMMsl7WBKlf+Af3Q==", "user"=>{"first_name"=>"Jack", "last_name"=>"Sparrow", "user_name"=>"jsparrow", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Create User"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:36:in `block in create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."user_name" = ? LIMIT ?[0m  [["user_name", "jsparrow"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:36:in `block in create'
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "user_name", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["first_name", "Jack"], ["last_name", "Sparrow"], ["user_name", "jsparrow"], ["password_digest", "$2a$12$TobIVJu6G1DaPVDD8R8TJOe/v1g5CX9LnX/qk1oHSQiedxvjUZmb2"], ["created_at", "2019-09-25 16:25:28.812765"], ["updated_at", "2019-09-25 16:25:28.812765"]]
+  ↳ app/controllers/users_controller.rb:36:in `block in create'
+  [1m[35m (1.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:36:in `block in create'
+Redirected to http://localhost:3000/
+Completed 302 Found in 273ms (ActiveRecord: 2.3ms | Allocations: 4044)
+
+
+Started GET "/" for ::1 at 2019-09-25 11:25:28 -0500
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 148)
+Completed 200 OK in 15ms (Views: 13.9ms | ActiveRecord: 0.0ms | Allocations: 8685)
+
+
+Started GET "/login" for ::1 at 2019-09-25 11:25:30 -0500
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 3.6ms | Allocations: 2236)
+Completed 200 OK in 19ms (Views: 17.3ms | ActiveRecord: 0.0ms | Allocations: 11086)
+
+
+Started POST "/sessions" for ::1 at 2019-09-25 11:25:33 -0500
+Processing by SessionsController#create as JS
+  Parameters: {"authenticity_token"=>"6wIT4EErKmN9fmi4iXohnNmJ2Qibf1J2ax/WC3qJiPm3C5xMQSBvRSoK48NitMLz7ouKg9i8cirTrvSw2oRJPA==", "user_name"=>"jsparrow", "password"=>"[FILTERED]", "commit"=>"Log in"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."user_name" = ? LIMIT ?[0m  [["user_name", "jsparrow"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:6:in `create'
+Redirected to http://localhost:3000/users/8
+Completed 200 OK in 267ms (ActiveRecord: 0.3ms | Allocations: 1257)
+
+
+Started GET "/users/8" for ::1 at 2019-09-25 11:25:33 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:84:in `set_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:90:in `set_session_user'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mFriendRequest Load (0.2ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/views/users/show.html.erb:30
+  Rendered users/show.html.erb within layouts/application (Duration: 6.6ms | Allocations: 2365)
+Completed 200 OK in 54ms (Views: 33.5ms | ActiveRecord: 2.8ms | Allocations: 15483)
+
+
+Started GET "/logout" for ::1 at 2019-09-25 11:25:37 -0500
+Processing by SessionsController#destroy as HTML
+Redirected to http://localhost:3000/
+Completed 302 Found in 4ms (ActiveRecord: 0.0ms | Allocations: 359)
+
+
+Started GET "/" for ::1 at 2019-09-25 11:25:37 -0500
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.6ms | Allocations: 147)
+Completed 200 OK in 26ms (Views: 22.5ms | ActiveRecord: 0.0ms | Allocations: 8533)
+
+
+Started GET "/login" for ::1 at 2019-09-25 11:25:38 -0500
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 3.0ms | Allocations: 1971)
+Completed 200 OK in 23ms (Views: 21.3ms | ActiveRecord: 0.0ms | Allocations: 10243)
+
+
+Started POST "/sessions" for ::1 at 2019-09-25 11:25:43 -0500
+Processing by SessionsController#create as JS
+  Parameters: {"authenticity_token"=>"cuf0bxVm+sZjXFNqCtXCDEi0scJUY5PpaYJHfiIYYPgu7nvDFW2/4DQo2BHhGyFjf7biSRegs7XRM2XFghWhPQ==", "user_name"=>"ariznyk", "password"=>"[FILTERED]", "commit"=>"Log in"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."user_name" = ? LIMIT ?[0m  [["user_name", "ariznyk"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:6:in `create'
+Redirected to http://localhost:3000/login
+Completed 200 OK in 2ms (ActiveRecord: 0.1ms | Allocations: 976)
+
+
+Started GET "/login" for ::1 at 2019-09-25 11:25:43 -0500
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 3.3ms | Allocations: 1973)
+Completed 200 OK in 23ms (Views: 21.7ms | ActiveRecord: 0.0ms | Allocations: 10261)
+
+
+Started POST "/sessions" for ::1 at 2019-09-25 11:25:47 -0500
+Processing by SessionsController#create as JS
+  Parameters: {"authenticity_token"=>"6AjJVB6KF91qlHbj2SoVyIb9fhCMHudPqWTtyQkapykbbOodZqO3/+Teott1kZUeRqHmq9ppJ4YE9CM7r7z6VQ==", "user_name"=>"andrew", "password"=>"[FILTERED]", "commit"=>"Log in"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."user_name" = ? LIMIT ?[0m  [["user_name", "andrew"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:6:in `create'
+Redirected to http://localhost:3000/users/6
+Completed 200 OK in 267ms (ActiveRecord: 0.2ms | Allocations: 1051)
+
+
+Started GET "/users/6" for ::1 at 2019-09-25 11:25:47 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:84:in `set_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:90:in `set_session_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 6]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 4]]
+  ↳ app/controllers/users_controller.rb:14:in `flatten'
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 6]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mFriendRequest Load (0.2ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ?[0m  [["user_id", 6]]
+  ↳ app/views/users/show.html.erb:30
+  Rendered users/show.html.erb within layouts/application (Duration: 3.5ms | Allocations: 1196)
+Completed 200 OK in 38ms (Views: 18.1ms | ActiveRecord: 1.8ms | Allocations: 16527)
+
+
+Started GET "/users" for ::1 at 2019-09-25 11:25:52 -0500
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:90:in `set_session_user'
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:5
+  Rendered users/index.html.erb within layouts/application (Duration: 3.0ms | Allocations: 851)
+Completed 200 OK in 28ms (Views: 24.0ms | ActiveRecord: 0.5ms | Allocations: 9734)
+
+
+Started GET "/users/8" for ::1 at 2019-09-25 11:25:53 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:84:in `set_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:90:in `set_session_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ? AND "users"."id" = ? LIMIT ?[0m  [["user_a_id", 6], ["id", 8], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:39
+  Rendered users/show.html.erb within layouts/application (Duration: 7.9ms | Allocations: 1073)
+Completed 200 OK in 50ms (Views: 38.3ms | ActiveRecord: 1.4ms | Allocations: 11890)
+
+
+Started GET "/users/add_friend/8" for ::1 at 2019-09-25 11:25:54 -0500
+Processing by UsersController#send_friend_request as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:84:in `set_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:90:in `set_session_user'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:77:in `send_friend_request'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:77:in `send_friend_request'
+  [1m[36mFriendRequest Create (0.9ms)[0m  [1m[32mINSERT INTO "friend_requests" ("sender_id", "user_id") VALUES (?, ?)[0m  [["sender_id", 6], ["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:77:in `send_friend_request'
+  [1m[35m (3.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:77:in `send_friend_request'
+Redirected to http://localhost:3000/users/6
+Completed 302 Found in 85ms (ActiveRecord: 6.7ms | Allocations: 6857)
+
+
+Started GET "/users/6" for ::1 at 2019-09-25 11:25:54 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:84:in `set_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:90:in `set_session_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 6]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 4]]
+  ↳ app/controllers/users_controller.rb:14:in `flatten'
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 6]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mFriendRequest Load (0.1ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ?[0m  [["user_id", 6]]
+  ↳ app/views/users/show.html.erb:30
+  Rendered users/show.html.erb within layouts/application (Duration: 3.6ms | Allocations: 1140)
+Completed 200 OK in 22ms (Views: 14.5ms | ActiveRecord: 0.9ms | Allocations: 12749)
+
+
+Started GET "/logout" for ::1 at 2019-09-25 11:25:57 -0500
+Processing by SessionsController#destroy as HTML
+Redirected to http://localhost:3000/
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms | Allocations: 369)
+
+
+Started GET "/" for ::1 at 2019-09-25 11:25:57 -0500
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.8ms | Allocations: 140)
+Completed 200 OK in 29ms (Views: 28.0ms | ActiveRecord: 0.0ms | Allocations: 8518)
+
+
+Started GET "/login" for ::1 at 2019-09-25 11:25:58 -0500
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 2.8ms | Allocations: 1972)
+Completed 200 OK in 18ms (Views: 17.1ms | ActiveRecord: 0.0ms | Allocations: 10271)
+
+
+Started POST "/sessions" for ::1 at 2019-09-25 11:26:03 -0500
+Processing by SessionsController#create as JS
+  Parameters: {"authenticity_token"=>"feylHBMXZ2G4lZB06TN3cg/i9xVlrS/FIZ7Wgdc6bLsh5SqwExwiR+/hGw8C/ZQdOOCkniZuD5mZL/Q6dzetfg==", "user_name"=>"jsparrow", "password"=>"[FILTERED]", "commit"=>"Log in"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."user_name" = ? LIMIT ?[0m  [["user_name", "jsparrow"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:6:in `create'
+Redirected to http://localhost:3000/users/8
+Completed 200 OK in 265ms (ActiveRecord: 0.1ms | Allocations: 1028)
+
+
+Started GET "/users/8" for ::1 at 2019-09-25 11:26:04 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:84:in `set_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:90:in `set_session_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mFriendRequest Load (0.2ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/views/users/show.html.erb:30
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."friend_request_id" = ? LIMIT ?[0m  [["friend_request_id", 2], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:31
+  Rendered users/show.html.erb within layouts/application (Duration: 20.1ms | Allocations: 5599)
+Completed 500 Internal Server Error in 31ms (ActiveRecord: 1.9ms | Allocations: 8539)
+
+
+  
+ActionView::Template::Error (SQLite3::SQLException: no such column: users.friend_request_id):
+    28:   <% end %>
+    29:   <h2>Your friend requests:</h2>
+    30:   <% @user.friend_requests.each do |request| %>
+    31:     <%= request.sender.to_string %>
+    32:   <% end %>
+    33: <% end %>
+    34: 
+  
+app/views/users/show.html.erb:31
+app/views/users/show.html.erb:30
+Started PUT "/__web_console/repl_sessions/0ffff3328cda870c8fa65ad276a37d5a" for ::1 at 2019-09-25 11:27:26 -0500
+Started PUT "/__web_console/repl_sessions/0ffff3328cda870c8fa65ad276a37d5a" for ::1 at 2019-09-25 11:27:26 -0500
+Started PUT "/__web_console/repl_sessions/0ffff3328cda870c8fa65ad276a37d5a" for ::1 at 2019-09-25 11:27:30 -0500
+Started PUT "/__web_console/repl_sessions/0ffff3328cda870c8fa65ad276a37d5a" for ::1 at 2019-09-25 11:27:33 -0500
+Started PUT "/__web_console/repl_sessions/0ffff3328cda870c8fa65ad276a37d5a" for ::1 at 2019-09-25 11:27:39 -0500
+Started PUT "/__web_console/repl_sessions/0ffff3328cda870c8fa65ad276a37d5a" for ::1 at 2019-09-25 11:27:40 -0500
+Started PUT "/__web_console/repl_sessions/0ffff3328cda870c8fa65ad276a37d5a" for ::1 at 2019-09-25 11:27:41 -0500
+Started PUT "/__web_console/repl_sessions/0ffff3328cda870c8fa65ad276a37d5a" for ::1 at 2019-09-25 11:27:48 -0500
+Started PUT "/__web_console/repl_sessions/0ffff3328cda870c8fa65ad276a37d5a" for ::1 at 2019-09-25 11:27:53 -0500
+Started PUT "/__web_console/repl_sessions/0ffff3328cda870c8fa65ad276a37d5a" for ::1 at 2019-09-25 11:27:54 -0500
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."first_name" = ? LIMIT ?[0m  [["first_name", "Jack"], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:31
+Started PUT "/__web_console/repl_sessions/0ffff3328cda870c8fa65ad276a37d5a" for ::1 at 2019-09-25 11:27:59 -0500
+Started PUT "/__web_console/repl_sessions/0ffff3328cda870c8fa65ad276a37d5a" for ::1 at 2019-09-25 11:28:04 -0500
+  [1m[36mFriendRequest Load (0.2ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ? LIMIT ?[0m  [["user_id", 8], ["LIMIT", 11]]
+Started PUT "/__web_console/repl_sessions/0ffff3328cda870c8fa65ad276a37d5a" for ::1 at 2019-09-25 11:28:16 -0500
+Started PUT "/__web_console/repl_sessions/0ffff3328cda870c8fa65ad276a37d5a" for ::1 at 2019-09-25 11:28:18 -0500
+Started PUT "/__web_console/repl_sessions/0ffff3328cda870c8fa65ad276a37d5a" for ::1 at 2019-09-25 11:28:21 -0500
+Started PUT "/__web_console/repl_sessions/0ffff3328cda870c8fa65ad276a37d5a" for ::1 at 2019-09-25 11:28:22 -0500
+  [1m[36mFriendRequest Load (0.2ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ? ORDER BY "friend_requests"."id" ASC LIMIT ?[0m  [["user_id", 8], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:31
+Started PUT "/__web_console/repl_sessions/0ffff3328cda870c8fa65ad276a37d5a" for ::1 at 2019-09-25 11:28:24 -0500
+Started PUT "/__web_console/repl_sessions/0ffff3328cda870c8fa65ad276a37d5a" for ::1 at 2019-09-25 11:28:26 -0500
+Started PUT "/__web_console/repl_sessions/0ffff3328cda870c8fa65ad276a37d5a" for ::1 at 2019-09-25 11:28:28 -0500
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."friend_request_id" = ? LIMIT ?[0m  [["friend_request_id", 2], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:31
+Started GET "/users/8" for ::1 at 2019-09-25 11:28:49 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:84:in `set_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:90:in `set_session_user'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mFriendRequest Load (0.1ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/views/users/show.html.erb:30
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."friend_request_id" = ? LIMIT ?[0m  [["friend_request_id", 2], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:31
+  Rendered users/show.html.erb within layouts/application (Duration: 11.2ms | Allocations: 6554)
+Completed 500 Internal Server Error in 36ms (ActiveRecord: 3.2ms | Allocations: 19560)
+
+
+  
+ActionView::Template::Error (SQLite3::SQLException: no such column: users.friend_request_id):
+    28:   <% end %>
+    29:   <h2>Your friend requests:</h2>
+    30:   <% @user.friend_requests.each do |request| %>
+    31:     <%= request.sender.to_string %>
+    32:   <% end %>
+    33: <% end %>
+    34: 
+  
+app/views/users/show.html.erb:31
+app/views/users/show.html.erb:30
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:07 -0500
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:07 -0500
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:07 -0500
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:08 -0500
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:08 -0500
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:09 -0500
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:09 -0500
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:09 -0500
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:10 -0500
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:11 -0500
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:12 -0500
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:12 -0500
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:12 -0500
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:13 -0500
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:13 -0500
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."first_name" = ? LIMIT ?[0m  [["first_name", "Jack"], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:31
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:14 -0500
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:14 -0500
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:14 -0500
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:14 -0500
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:15 -0500
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:16 -0500
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:16 -0500
+  [1m[36mFriendRequest Load (0.2ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ? LIMIT ?[0m  [["user_id", 8], ["LIMIT", 11]]
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:17 -0500
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:17 -0500
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:17 -0500
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:17 -0500
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:17 -0500
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:18 -0500
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:18 -0500
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:19 -0500
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:19 -0500
+  [1m[36mFriendRequest Load (0.2ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ? ORDER BY "friend_requests"."id" ASC LIMIT ?[0m  [["user_id", 8], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:31
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:20 -0500
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:20 -0500
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:20 -0500
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:21 -0500
+Started PUT "/__web_console/repl_sessions/ef6d7d210741fb19c2e94ebcd2f03b4a" for ::1 at 2019-09-25 11:29:21 -0500
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."friend_request_id" = ? LIMIT ?[0m  [["friend_request_id", 2], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:31
+Started GET "/users/8" for ::1 at 2019-09-25 11:33:18 -0500
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:84:in `set_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:90:in `set_session_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mFriendRequest Load (0.5ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/views/users/show.html.erb:30
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."sender_id" = ? LIMIT ?[0m  [["sender_id", 2], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:31
+  Rendered users/show.html.erb within layouts/application (Duration: 16.8ms | Allocations: 6541)
+Completed 500 Internal Server Error in 50ms (ActiveRecord: 4.6ms | Allocations: 19531)
+
+
+  
+ActionView::Template::Error (SQLite3::SQLException: no such column: users.sender_id):
+    28:   <% end %>
+    29:   <h2>Your friend requests:</h2>
+    30:   <% @user.friend_requests.each do |request| %>
+    31:     <%= request.sender.to_string %>
+    32:   <% end %>
+    33: <% end %>
+    34: 
+  
+app/views/users/show.html.erb:31
+app/views/users/show.html.erb:30
+Started PUT "/__web_console/repl_sessions/f3a7ce08685ca23976bfd8198e0477d4" for ::1 at 2019-09-25 11:33:21 -0500
+Started PUT "/__web_console/repl_sessions/f3a7ce08685ca23976bfd8198e0477d4" for ::1 at 2019-09-25 11:33:21 -0500
+Started PUT "/__web_console/repl_sessions/f3a7ce08685ca23976bfd8198e0477d4" for ::1 at 2019-09-25 11:33:21 -0500
+Started PUT "/__web_console/repl_sessions/f3a7ce08685ca23976bfd8198e0477d4" for ::1 at 2019-09-25 11:33:21 -0500
+Started PUT "/__web_console/repl_sessions/f3a7ce08685ca23976bfd8198e0477d4" for ::1 at 2019-09-25 11:33:22 -0500
+Started PUT "/__web_console/repl_sessions/f3a7ce08685ca23976bfd8198e0477d4" for ::1 at 2019-09-25 11:33:23 -0500
+Started PUT "/__web_console/repl_sessions/f3a7ce08685ca23976bfd8198e0477d4" for ::1 at 2019-09-25 11:33:24 -0500
+Started PUT "/__web_console/repl_sessions/f3a7ce08685ca23976bfd8198e0477d4" for ::1 at 2019-09-25 11:33:24 -0500
+Started PUT "/__web_console/repl_sessions/f3a7ce08685ca23976bfd8198e0477d4" for ::1 at 2019-09-25 11:33:24 -0500
+Started PUT "/__web_console/repl_sessions/f3a7ce08685ca23976bfd8198e0477d4" for ::1 at 2019-09-25 11:33:24 -0500
+Started PUT "/__web_console/repl_sessions/f3a7ce08685ca23976bfd8198e0477d4" for ::1 at 2019-09-25 11:33:25 -0500
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."first_name" = ? LIMIT ?[0m  [["first_name", "Jack"], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:31
+Started PUT "/__web_console/repl_sessions/f3a7ce08685ca23976bfd8198e0477d4" for ::1 at 2019-09-25 11:33:25 -0500
+Started PUT "/__web_console/repl_sessions/f3a7ce08685ca23976bfd8198e0477d4" for ::1 at 2019-09-25 11:33:25 -0500
+Started PUT "/__web_console/repl_sessions/f3a7ce08685ca23976bfd8198e0477d4" for ::1 at 2019-09-25 11:33:26 -0500
+Started PUT "/__web_console/repl_sessions/f3a7ce08685ca23976bfd8198e0477d4" for ::1 at 2019-09-25 11:33:26 -0500
+Started PUT "/__web_console/repl_sessions/f3a7ce08685ca23976bfd8198e0477d4" for ::1 at 2019-09-25 11:33:26 -0500
+Started PUT "/__web_console/repl_sessions/f3a7ce08685ca23976bfd8198e0477d4" for ::1 at 2019-09-25 11:33:27 -0500
+  [1m[36mFriendRequest Load (0.2ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ? LIMIT ?[0m  [["user_id", 8], ["LIMIT", 11]]
+Started PUT "/__web_console/repl_sessions/f3a7ce08685ca23976bfd8198e0477d4" for ::1 at 2019-09-25 11:33:27 -0500
+Started PUT "/__web_console/repl_sessions/f3a7ce08685ca23976bfd8198e0477d4" for ::1 at 2019-09-25 11:33:28 -0500
+Started PUT "/__web_console/repl_sessions/f3a7ce08685ca23976bfd8198e0477d4" for ::1 at 2019-09-25 11:33:28 -0500
+Started PUT "/__web_console/repl_sessions/f3a7ce08685ca23976bfd8198e0477d4" for ::1 at 2019-09-25 11:33:28 -0500
+Started PUT "/__web_console/repl_sessions/f3a7ce08685ca23976bfd8198e0477d4" for ::1 at 2019-09-25 11:33:28 -0500
+Started PUT "/__web_console/repl_sessions/f3a7ce08685ca23976bfd8198e0477d4" for ::1 at 2019-09-25 11:33:29 -0500
+  [1m[36mFriendRequest Load (0.2ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ? ORDER BY "friend_requests"."id" ASC LIMIT ?[0m  [["user_id", 8], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:31
+Started PUT "/__web_console/repl_sessions/f3a7ce08685ca23976bfd8198e0477d4" for ::1 at 2019-09-25 11:33:29 -0500
+Started PUT "/__web_console/repl_sessions/f3a7ce08685ca23976bfd8198e0477d4" for ::1 at 2019-09-25 11:33:30 -0500
+Started PUT "/__web_console/repl_sessions/f3a7ce08685ca23976bfd8198e0477d4" for ::1 at 2019-09-25 11:33:30 -0500
+Started PUT "/__web_console/repl_sessions/f3a7ce08685ca23976bfd8198e0477d4" for ::1 at 2019-09-25 11:33:31 -0500
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."sender_id" = ? LIMIT ?[0m  [["sender_id", 2], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:31
+Started GET "/users/8" for ::1 at 2019-09-25 11:33:45 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:84:in `set_user'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:90:in `set_session_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 2.8ms | Allocations: 1511)
+Completed 500 Internal Server Error in 26ms (ActiveRecord: 1.8ms | Allocations: 14535)
+
+
+  
+ActionView::Template::Error (Unknown key: :association_foreign_key. Valid keys are: :class_name, :anonymous_class, :foreign_key, :validate, :autosave, :foreign_type, :dependent, :primary_key, :inverse_of, :required, :as, :touch):
+    27:     </p>
+    28:   <% end %>
+    29:   <h2>Your friend requests:</h2>
+    30:   <% @user.friend_requests.each do |request| %>
+    31:     <%= request.sender.to_string %>
+    32:   <% end %>
+    33: <% end %>
+  
+app/models/friend_request.rb:3:in `<class:FriendRequest>'
+app/models/friend_request.rb:1:in `<main>'
+app/views/users/show.html.erb:30
+Started GET "/users/8" for ::1 at 2019-09-25 11:34:15 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:84:in `set_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:90:in `set_session_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 2.7ms | Allocations: 1510)
+Completed 500 Internal Server Error in 28ms (ActiveRecord: 1.7ms | Allocations: 14494)
+
+
+  
+ActionView::Template::Error (Unknown key: :association_foreign_key. Valid keys are: :class_name, :anonymous_class, :foreign_key, :validate, :autosave, :foreign_type, :dependent, :primary_key, :inverse_of, :required, :as, :touch):
+    27:     </p>
+    28:   <% end %>
+    29:   <h2>Your friend requests:</h2>
+    30:   <% @user.friend_requests.each do |request| %>
+    31:     <%= request.sender.to_string %>
+    32:   <% end %>
+    33: <% end %>
+  
+app/models/friend_request.rb:3:in `<class:FriendRequest>'
+app/models/friend_request.rb:1:in `<main>'
+app/views/users/show.html.erb:30
+Started GET "/users/8" for ::1 at 2019-09-25 11:34:48 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:84:in `set_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:90:in `set_session_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mFriendRequest Load (0.2ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/views/users/show.html.erb:30
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."user_id" = ? LIMIT ?[0m  [["user_id", 2], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:31
+  Rendered users/show.html.erb within layouts/application (Duration: 11.5ms | Allocations: 6537)
+Completed 500 Internal Server Error in 36ms (ActiveRecord: 4.2ms | Allocations: 19527)
+
+
+  
+ActionView::Template::Error (SQLite3::SQLException: no such column: users.user_id):
+    28:   <% end %>
+    29:   <h2>Your friend requests:</h2>
+    30:   <% @user.friend_requests.each do |request| %>
+    31:     <%= request.sender.to_string %>
+    32:   <% end %>
+    33: <% end %>
+    34: 
+  
+app/views/users/show.html.erb:31
+app/views/users/show.html.erb:30
+Started GET "/users/8" for ::1 at 2019-09-25 11:34:58 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:84:in `set_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:90:in `set_session_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mFriendRequest Load (0.5ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/views/users/show.html.erb:30
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:31
+  Rendered users/show.html.erb within layouts/application (Duration: 23.3ms | Allocations: 6460)
+Completed 500 Internal Server Error in 46ms (ActiveRecord: 4.8ms | Allocations: 19483)
+
+
+  
+ActionView::Template::Error (undefined method `to_string' for nil:NilClass):
+    28:   <% end %>
+    29:   <h2>Your friend requests:</h2>
+    30:   <% @user.friend_requests.each do |request| %>
+    31:     <%= request.sender.to_string %>
+    32:   <% end %>
+    33: <% end %>
+    34: 
+  
+app/views/users/show.html.erb:31
+app/views/users/show.html.erb:30
+Started PUT "/__web_console/repl_sessions/701e4bac9d393da36391cca456115964" for ::1 at 2019-09-25 11:35:16 -0500
+Started PUT "/__web_console/repl_sessions/701e4bac9d393da36391cca456115964" for ::1 at 2019-09-25 11:35:16 -0500
+Started PUT "/__web_console/repl_sessions/701e4bac9d393da36391cca456115964" for ::1 at 2019-09-25 11:35:16 -0500
+Started PUT "/__web_console/repl_sessions/701e4bac9d393da36391cca456115964" for ::1 at 2019-09-25 11:35:16 -0500
+Started PUT "/__web_console/repl_sessions/701e4bac9d393da36391cca456115964" for ::1 at 2019-09-25 11:35:17 -0500
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."first_name" = ? LIMIT ?[0m  [["first_name", "Jack"], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:31
+Started PUT "/__web_console/repl_sessions/701e4bac9d393da36391cca456115964" for ::1 at 2019-09-25 11:35:18 -0500
+Started PUT "/__web_console/repl_sessions/701e4bac9d393da36391cca456115964" for ::1 at 2019-09-25 11:35:18 -0500
+Started PUT "/__web_console/repl_sessions/701e4bac9d393da36391cca456115964" for ::1 at 2019-09-25 11:35:18 -0500
+Started PUT "/__web_console/repl_sessions/701e4bac9d393da36391cca456115964" for ::1 at 2019-09-25 11:35:18 -0500
+Started PUT "/__web_console/repl_sessions/701e4bac9d393da36391cca456115964" for ::1 at 2019-09-25 11:35:19 -0500
+  [1m[36mFriendRequest Load (0.2ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ? ORDER BY "friend_requests"."id" ASC LIMIT ?[0m  [["user_id", 8], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:31
+Started PUT "/__web_console/repl_sessions/701e4bac9d393da36391cca456115964" for ::1 at 2019-09-25 11:35:20 -0500
+Started PUT "/__web_console/repl_sessions/701e4bac9d393da36391cca456115964" for ::1 at 2019-09-25 11:35:20 -0500
+Started PUT "/__web_console/repl_sessions/701e4bac9d393da36391cca456115964" for ::1 at 2019-09-25 11:35:21 -0500
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:31
+Started GET "/users/8" for ::1 at 2019-09-25 11:36:04 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:84:in `set_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:90:in `set_session_user'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mFriendRequest Load (0.1ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."sender_id" = ?[0m  [["sender_id", 8]]
+  ↳ app/views/users/show.html.erb:30
+  Rendered users/show.html.erb within layouts/application (Duration: 4.8ms | Allocations: 2427)
+Completed 200 OK in 49ms (Views: 18.7ms | ActiveRecord: 2.5ms | Allocations: 23300)
+
+
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."first_name" = ? LIMIT ?[0m  [["first_name", "Jack"], ["LIMIT", 1]]
+  [1m[36mFriendRequest Load (0.1ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."sender_id" = ? ORDER BY "friend_requests"."id" ASC LIMIT ?[0m  [["sender_id", 8], ["LIMIT", 1]]
+  [1m[36mFriendRequest Load (0.3ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."sender_id" = ? LIMIT ?[0m  [["sender_id", 8], ["LIMIT", 11]]
+Started GET "/users/8" for ::1 at 2019-09-25 11:39:53 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:84:in `set_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:90:in `set_session_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mFriendRequest Load (0.3ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/views/users/show.html.erb:30
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:31
+  Rendered users/show.html.erb within layouts/application (Duration: 13.8ms | Allocations: 5489)
+Completed 200 OK in 54ms (Views: 29.2ms | ActiveRecord: 3.6ms | Allocations: 26290)
+
+
+Started GET "/users/8" for ::1 at 2019-09-25 11:40:50 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:84:in `set_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:90:in `set_session_user'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mFriendRequest Load (0.4ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/views/users/show.html.erb:30
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:31
+  Rendered users/show.html.erb within layouts/application (Duration: 13.3ms | Allocations: 5480)
+Completed 200 OK in 62ms (Views: 29.0ms | ActiveRecord: 4.4ms | Allocations: 26214)
+
+
+Started GET "/users/8" for ::1 at 2019-09-25 11:40:52 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:84:in `set_user'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:90:in `set_session_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mFriendRequest Load (0.3ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/views/users/show.html.erb:30
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:31
+  Rendered users/show.html.erb within layouts/application (Duration: 6.8ms | Allocations: 1538)
+Completed 200 OK in 69ms (Views: 60.8ms | ActiveRecord: 1.3ms | Allocations: 12373)
+
+
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."first_name" = ? LIMIT ?[0m  [["first_name", "Jack"], ["LIMIT", 1]]
+  [1m[36mFriendRequest Load (0.1ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ? LIMIT ?[0m  [["user_id", 8], ["LIMIT", 11]]
+  [1m[36mFriendRequest Load (0.3ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ? ORDER BY "friend_requests"."id" ASC LIMIT ?[0m  [["user_id", 8], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+Started GET "/users/8" for ::1 at 2019-09-25 11:42:29 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:84:in `set_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:90:in `set_session_user'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mFriendRequest Load (0.1ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/views/users/show.html.erb:28
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:29
+  Rendered users/show.html.erb within layouts/application (Duration: 4.0ms | Allocations: 2186)
+Completed 200 OK in 30ms (Views: 19.4ms | ActiveRecord: 1.3ms | Allocations: 13940)
+
+
+Started GET "/users" for ::1 at 2019-09-25 12:02:34 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  
+SyntaxError (/Users/classifieddatabank/Development/code/fb/app/controllers/users_controller.rb:103: syntax error, unexpected end-of-input, expecting end):
+  
+app/controllers/users_controller.rb:103: syntax error, unexpected end-of-input, expecting end
+app/controllers/users_controller.rb:103: syntax error, unexpected end-of-input, expecting end
+app/controllers/users_controller.rb:103: syntax error, unexpected end-of-input, expecting end
+Started GET "/users" for ::1 at 2019-09-25 12:02:54 -0500
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:96:in `set_session_user'
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:5
+  Rendered users/index.html.erb within layouts/application (Duration: 2.7ms | Allocations: 1104)
+Completed 200 OK in 43ms (Views: 24.6ms | ActiveRecord: 2.9ms | Allocations: 18592)
+
+
+Started GET "/users/7" for ::1 at 2019-09-25 12:02:56 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:90:in `set_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:96:in `set_session_user'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 7]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ? AND "users"."id" = ? LIMIT ?[0m  [["user_a_id", 8], ["id", 7], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:40
+  Rendered users/show.html.erb within layouts/application (Duration: 8.3ms | Allocations: 1776)
+Completed 200 OK in 47ms (Views: 26.9ms | ActiveRecord: 2.6ms | Allocations: 14937)
+
+
+Started GET "/users/add_friend/7" for ::1 at 2019-09-25 12:02:58 -0500
+Processing by UsersController#send_friend_request as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:90:in `set_user'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:96:in `set_session_user'
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:77:in `send_friend_request'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:77:in `send_friend_request'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:77:in `send_friend_request'
+  [1m[36mFriendRequest Create (0.4ms)[0m  [1m[32mINSERT INTO "friend_requests" ("sender_id", "user_id") VALUES (?, ?)[0m  [["sender_id", 8], ["user_id", 7]]
+  ↳ app/controllers/users_controller.rb:77:in `send_friend_request'
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:77:in `send_friend_request'
+Redirected to http://localhost:3000/users/8
+Completed 302 Found in 33ms (ActiveRecord: 3.6ms | Allocations: 8767)
+
+
+Started GET "/users/8" for ::1 at 2019-09-25 12:02:58 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:90:in `set_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:96:in `set_session_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mFriendRequest Load (0.5ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/views/users/show.html.erb:28
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:30
+  Rendered users/show.html.erb within layouts/application (Duration: 6.6ms | Allocations: 2340)
+Completed 200 OK in 22ms (Views: 15.3ms | ActiveRecord: 1.4ms | Allocations: 13103)
+
+
+Started GET "/users/8" for ::1 at 2019-09-25 12:07:06 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:92:in `set_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:98:in `set_session_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mFriendRequest Load (0.3ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/views/users/show.html.erb:28
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:30
+  Rendered users/show.html.erb within layouts/application (Duration: 14.7ms | Allocations: 6172)
+Completed 200 OK in 51ms (Views: 28.8ms | ActiveRecord: 3.6ms | Allocations: 27680)
+
+
+Started GET "/users/accept_friend" for ::1 at 2019-09-25 12:07:13 -0500
+Processing by UsersController#accept_friend_request as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:98:in `set_session_user'
+Completed 404 Not Found in 3ms (ActiveRecord: 0.2ms | Allocations: 1165)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  
+app/controllers/users_controller.rb:82:in `accept_friend_request'
+Started PUT "/__web_console/repl_sessions/9a0b72adf9626169668fc498e0604ffe" for ::1 at 2019-09-25 12:07:23 -0500
+Started PUT "/__web_console/repl_sessions/9a0b72adf9626169668fc498e0604ffe" for ::1 at 2019-09-25 12:07:23 -0500
+Started PUT "/__web_console/repl_sessions/9a0b72adf9626169668fc498e0604ffe" for ::1 at 2019-09-25 12:08:02 -0500
+Started GET "/users/8" for ::1 at 2019-09-25 12:15:00 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:92:in `set_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:98:in `set_session_user'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mFriendRequest Load (0.2ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/views/users/show.html.erb:28
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:30
+  Rendered users/show.html.erb within layouts/application (Duration: 15.0ms | Allocations: 5335)
+Completed 200 OK in 46ms (Views: 34.9ms | ActiveRecord: 1.6ms | Allocations: 17061)
+
+
+Started POST "/users/accept_friend" for ::1 at 2019-09-25 12:15:02 -0500
+  
+ActionController::RoutingError (No route matches [POST] "/users/accept_friend"):
+  
+actionpack (6.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.0.7) lib/webpacker/dev_server_proxy.rb:29:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.0) lib/rails/engine.rb:526:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started POST "/users/accept_friend" for ::1 at 2019-09-25 12:15:04 -0500
+  
+ActionController::RoutingError (No route matches [POST] "/users/accept_friend"):
+  
+actionpack (6.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.0.7) lib/webpacker/dev_server_proxy.rb:29:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.0) lib/rails/engine.rb:526:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started POST "/users/accept_friend" for ::1 at 2019-09-25 12:15:04 -0500
+  
+ActionController::RoutingError (No route matches [POST] "/users/accept_friend"):
+  
+actionpack (6.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.0.7) lib/webpacker/dev_server_proxy.rb:29:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.0) lib/rails/engine.rb:526:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started POST "/users/accept_friend" for ::1 at 2019-09-25 12:15:20 -0500
+  
+ActionController::RoutingError (No route matches [POST] "/users/accept_friend"):
+  
+actionpack (6.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.0.7) lib/webpacker/dev_server_proxy.rb:29:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.0) lib/rails/engine.rb:526:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started POST "/users/accept_friend" for ::1 at 2019-09-25 12:15:21 -0500
+  
+ActionController::RoutingError (No route matches [POST] "/users/accept_friend"):
+  
+actionpack (6.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.0.7) lib/webpacker/dev_server_proxy.rb:29:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.0) lib/rails/engine.rb:526:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started POST "/users/accept_friend" for ::1 at 2019-09-25 12:15:21 -0500
+  
+ActionController::RoutingError (No route matches [POST] "/users/accept_friend"):
+  
+actionpack (6.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.0.7) lib/webpacker/dev_server_proxy.rb:29:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.0) lib/rails/engine.rb:526:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started POST "/users/accept_friend" for ::1 at 2019-09-25 12:15:21 -0500
+  
+ActionController::RoutingError (No route matches [POST] "/users/accept_friend"):
+  
+actionpack (6.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.0.7) lib/webpacker/dev_server_proxy.rb:29:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.0) lib/rails/engine.rb:526:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started POST "/users/accept_friend" for ::1 at 2019-09-25 12:15:21 -0500
+  
+ActionController::RoutingError (No route matches [POST] "/users/accept_friend"):
+  
+actionpack (6.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.0.7) lib/webpacker/dev_server_proxy.rb:29:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.0) lib/rails/engine.rb:526:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started POST "/users/accept_friend" for ::1 at 2019-09-25 12:15:21 -0500
+  
+ActionController::RoutingError (No route matches [POST] "/users/accept_friend"):
+  
+actionpack (6.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.0.7) lib/webpacker/dev_server_proxy.rb:29:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.0) lib/rails/engine.rb:526:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started POST "/users/accept_friend" for ::1 at 2019-09-25 12:15:22 -0500
+  
+ActionController::RoutingError (No route matches [POST] "/users/accept_friend"):
+  
+actionpack (6.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.0.7) lib/webpacker/dev_server_proxy.rb:29:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.0) lib/rails/engine.rb:526:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/users/8" for ::1 at 2019-09-25 12:15:42 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:92:in `set_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:98:in `set_session_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mFriendRequest Load (0.1ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/views/users/show.html.erb:28
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:30
+  Rendered users/show.html.erb within layouts/application (Duration: 4.1ms | Allocations: 2229)
+Completed 200 OK in 24ms (Views: 18.2ms | ActiveRecord: 0.8ms | Allocations: 12958)
+
+
+Started POST "/users/accept_friend" for ::1 at 2019-09-25 12:15:43 -0500
+  
+ActionController::RoutingError (No route matches [POST] "/users/accept_friend"):
+  
+actionpack (6.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.0.7) lib/webpacker/dev_server_proxy.rb:29:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.0) lib/rails/engine.rb:526:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/users/8" for ::1 at 2019-09-25 12:16:06 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:92:in `set_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:98:in `set_session_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mFriendRequest Load (0.1ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/views/users/show.html.erb:28
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:30
+  Rendered users/show.html.erb within layouts/application (Duration: 3.8ms | Allocations: 2216)
+Completed 200 OK in 27ms (Views: 16.3ms | ActiveRecord: 1.2ms | Allocations: 12943)
+
+
+Started POST "/users/accept_friend" for ::1 at 2019-09-25 12:16:07 -0500
+  
+ActionController::RoutingError (No route matches [POST] "/users/accept_friend"):
+  
+actionpack (6.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.0.7) lib/webpacker/dev_server_proxy.rb:29:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.0) lib/rails/engine.rb:526:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started POST "/users/accept_friend" for ::1 at 2019-09-25 12:16:08 -0500
+  
+ActionController::RoutingError (No route matches [POST] "/users/accept_friend"):
+  
+actionpack (6.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.0.7) lib/webpacker/dev_server_proxy.rb:29:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.0) lib/rails/engine.rb:526:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started POST "/users/accept_friend" for ::1 at 2019-09-25 12:16:08 -0500
+  
+ActionController::RoutingError (No route matches [POST] "/users/accept_friend"):
+  
+actionpack (6.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.0.7) lib/webpacker/dev_server_proxy.rb:29:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.0) lib/rails/engine.rb:526:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started POST "/users/accept_friend" for ::1 at 2019-09-25 12:16:08 -0500
+  
+ActionController::RoutingError (No route matches [POST] "/users/accept_friend"):
+  
+actionpack (6.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.0.7) lib/webpacker/dev_server_proxy.rb:29:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.0) lib/rails/engine.rb:526:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started POST "/users/accept_friend" for ::1 at 2019-09-25 12:16:09 -0500
+  
+ActionController::RoutingError (No route matches [POST] "/users/accept_friend"):
+  
+actionpack (6.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.0.7) lib/webpacker/dev_server_proxy.rb:29:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.0) lib/rails/engine.rb:526:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/users/8" for ::1 at 2019-09-25 12:16:38 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:92:in `set_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:98:in `set_session_user'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mFriendRequest Load (0.3ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/views/users/show.html.erb:28
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:30
+  Rendered users/show.html.erb within layouts/application (Duration: 19.7ms | Allocations: 6008)
+Completed 200 OK in 95ms (Views: 45.7ms | ActiveRecord: 5.3ms | Allocations: 26783)
+
+
+Started POST "/users/accept_friend" for ::1 at 2019-09-25 12:16:39 -0500
+Processing by UsersController#accept_friend_request as JS
+  Parameters: {"authenticity_token"=>"YcF097VIKa1uhb/DNZICjgR0w+du/nUgtQIWOBVm8B09yPtbtUNsiznxNLjeXOHhM3aQbC09VXwNszSDtWsx2A==", "sender"=>"#<User:0x00007fd90bc0b4f8>", "commit"=>"Accept"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:98:in `set_session_user'
+Completed 404 Not Found in 3ms (ActiveRecord: 0.2ms | Allocations: 1207)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  
+app/controllers/users_controller.rb:82:in `accept_friend_request'
+Started GET "/users/8" for ::1 at 2019-09-25 12:23:12 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:92:in `set_user'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:98:in `set_session_user'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 4.3ms | Allocations: 1485)
+Completed 500 Internal Server Error in 30ms (ActiveRecord: 1.1ms | Allocations: 14493)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <p id="notice"><%= notice %></p>
+<h1><%= "#{@user.to_string}'s profile page" %></h1>
+ 
+<h2><%= "News feed:" %></h2>
+<% @feed_posts.each do |post| %>
+  <p>
+    <h3><%= post.title %></h3>
+    <p><%= post.content %></p>
+    <p>&emsp;--<%= "Posted by #{post.user.to_string} on #{post.created_at_string}" %></p>
+    <% if @session_user.id == post.user_id %>
+      <p>
+        -- 
+        <%= link_to 'Edit', edit_post_path(post) %> 
+        --
+        <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %> 
+        --
+      </p>
+    <% end %>
+  </p>
+<% end %>
+
+<% if @session_user.id == @user.id %>
+  <h2>Your friends:</h2>
+  <% @user.friends.each do |friend| %>
+    <p><%= link_to friend.to_string, friend %></p>
+  <% end %>
+  <h2>Your friend requests:</h2>
+  <% @user.friend_requests.each do |request| %>
+    <p>
+      <%= request.sender.to_string %>
+      <%= button_to "Accept friend request", {:controller => "user", 
+                                              :action => "accept_friend", 
+                                              :sender => request.sender.id},
+                                              :method => "get"} %>
+      </p>
+  <% end %>
+<% end %>
+
+<% if @session_user.id == @user.id %>
+  <%= link_to 'New Post', new_post_path %> |
+  <%= link_to 'Edit Profile', edit_user_path(@user) %> |
+  <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %> |
+<% elsif !@session_user.friends.include?(@user) %>
+  <%= link_to "Add Friend", add_friend_users_path %>|
+<% end %>
+<% if @session_user.id != @user.id %>
+  <%= link_to "My Profile", @session_user %> |
+<% end %>
+<%= link_to "Home Page", users_path %> |
+<%= link_to "Log out", logout_path %>
+
+):
+1:    <p id="notice"><%= notice %></p>
+2:    <h1><%= "#{@user.to_string}'s profile page" %></h1>
+3:     
+4:    <h2><%= "News feed:" %></h2>
+5:    <% @feed_posts.each do |post| %>
+6:      <p>
+7:        <h3><%= post.title %></h3>
+8:        <p><%= post.content %></p>
+9:        <p>&emsp;--<%= "Posted by #{post.user.to_string} on #{post.created_at_string}" %></p>
+10:        <% if @session_user.id == post.user_id %>
+11:          <p>
+12:            -- 
+13:            <%= link_to 'Edit', edit_post_path(post) %> 
+14:            --
+15:            <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %> 
+16:            --
+17:          </p>
+18:        <% end %>
+19:      </p>
+20:    <% end %>
+21:    
+22:    <% if @session_user.id == @user.id %>
+23:      <h2>Your friends:</h2>
+24:      <% @user.friends.each do |friend| %>
+25:        <p><%= link_to friend.to_string, friend %></p>
+26:      <% end %>
+27:      <h2>Your friend requests:</h2>
+28:      <% @user.friend_requests.each do |request| %>
+29:        <p>
+30:          <%= request.sender.to_string %>
+31:          <%= button_to "Accept friend request", {:controller => "user", 
+32:                                                  :action => "accept_friend", 
+33:                                                  :sender => request.sender.id},
+34:                                                  :method => "get"} %>
+35:          </p>
+36:      <% end %>
+37:    <% end %>
+38:    
+39:    <% if @session_user.id == @user.id %>
+40:      <%= link_to 'New Post', new_post_path %> |
+41:      <%= link_to 'Edit Profile', edit_user_path(@user) %> |
+42:      <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %> |
+43:    <% elsif !@session_user.friends.include?(@user) %>
+44:      <%= link_to "Add Friend", add_friend_users_path %>|
+45:    <% end %>
+46:    <% if @session_user.id != @user.id %>
+47:      <%= link_to "My Profile", @session_user %> |
+48:    <% end %>
+49:    <%= link_to "Home Page", users_path %> |
+50:    <%= link_to "Log out", logout_path %>
+  
+app/views/users/show.html.erb:34: syntax error, unexpected tSTRING_DEND, expecting ')'
+app/views/users/show.html.erb:36: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:42: syntax error, unexpected tSTRING_DEND, expecting '}'
+app/views/users/show.html.erb:43: syntax error, unexpected elsif, expecting ')'
+app/views/users/show.html.erb:45: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:53: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:34: syntax error, unexpected tSTRING_DEND, expecting ')'
+app/views/users/show.html.erb:36: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:42: syntax error, unexpected tSTRING_DEND, expecting '}'
+app/views/users/show.html.erb:43: syntax error, unexpected elsif, expecting ')'
+app/views/users/show.html.erb:45: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:53: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:34: syntax error, unexpected tSTRING_DEND, expecting ')'
+app/views/users/show.html.erb:36: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:42: syntax error, unexpected tSTRING_DEND, expecting '}'
+app/views/users/show.html.erb:43: syntax error, unexpected elsif, expecting ')'
+app/views/users/show.html.erb:45: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:53: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:34: syntax error, unexpected tSTRING_DEND, expecting ')'
+app/views/users/show.html.erb:36: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:42: syntax error, unexpected tSTRING_DEND, expecting '}'
+app/views/users/show.html.erb:43: syntax error, unexpected elsif, expecting ')'
+app/views/users/show.html.erb:45: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:53: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:34: syntax error, unexpected tSTRING_DEND, expecting ')'
+app/views/users/show.html.erb:36: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:42: syntax error, unexpected tSTRING_DEND, expecting '}'
+app/views/users/show.html.erb:43: syntax error, unexpected elsif, expecting ')'
+app/views/users/show.html.erb:45: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:53: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:34: syntax error, unexpected tSTRING_DEND, expecting ')'
+app/views/users/show.html.erb:36: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:42: syntax error, unexpected tSTRING_DEND, expecting '}'
+app/views/users/show.html.erb:43: syntax error, unexpected elsif, expecting ')'
+app/views/users/show.html.erb:45: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:53: syntax error, unexpected end, expecting ')'
+Started GET "/users/8" for ::1 at 2019-09-25 12:24:44 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:92:in `set_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:98:in `set_session_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 2.8ms | Allocations: 1540)
+Completed 500 Internal Server Error in 17ms (ActiveRecord: 1.0ms | Allocations: 5212)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <p id="notice"><%= notice %></p>
+<h1><%= "#{@user.to_string}'s profile page" %></h1>
+ 
+<h2><%= "News feed:" %></h2>
+<% @feed_posts.each do |post| %>
+  <p>
+    <h3><%= post.title %></h3>
+    <p><%= post.content %></p>
+    <p>&emsp;--<%= "Posted by #{post.user.to_string} on #{post.created_at_string}" %></p>
+    <% if @session_user.id == post.user_id %>
+      <p>
+        -- 
+        <%= link_to 'Edit', edit_post_path(post) %> 
+        --
+        <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %> 
+        --
+      </p>
+    <% end %>
+  </p>
+<% end %>
+
+<% if @session_user.id == @user.id %>
+  <h2>Your friends:</h2>
+  <% @user.friends.each do |friend| %>
+    <p><%= link_to friend.to_string, friend %></p>
+  <% end %>
+  <h2>Your friend requests:</h2>
+  <% @user.friend_requests.each do |request| %>
+    <p>
+      <%= request.sender.to_string %>
+      <%= button_to "Accept friend request", {:controller => "user", 
+                                              :action => "accept_friend", 
+                                              :sender => request.sender.id},
+                                              :method => "get"} %>
+    </p>
+  <% end %>
+<% end %>
+
+<% if @session_user.id == @user.id %>
+  <%= link_to 'New Post', new_post_path %> |
+  <%= link_to 'Edit Profile', edit_user_path(@user) %> |
+  <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %> |
+<% elsif !@session_user.friends.include?(@user) %>
+  <%= link_to "Add Friend", add_friend_users_path %>|
+<% end %>
+<% if @session_user.id != @user.id %>
+  <%= link_to "My Profile", @session_user %> |
+<% end %>
+<%= link_to "Home Page", users_path %> |
+<%= link_to "Log out", logout_path %>
+
+):
+1:    <p id="notice"><%= notice %></p>
+2:    <h1><%= "#{@user.to_string}'s profile page" %></h1>
+3:     
+4:    <h2><%= "News feed:" %></h2>
+5:    <% @feed_posts.each do |post| %>
+6:      <p>
+7:        <h3><%= post.title %></h3>
+8:        <p><%= post.content %></p>
+9:        <p>&emsp;--<%= "Posted by #{post.user.to_string} on #{post.created_at_string}" %></p>
+10:        <% if @session_user.id == post.user_id %>
+11:          <p>
+12:            -- 
+13:            <%= link_to 'Edit', edit_post_path(post) %> 
+14:            --
+15:            <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %> 
+16:            --
+17:          </p>
+18:        <% end %>
+19:      </p>
+20:    <% end %>
+21:    
+22:    <% if @session_user.id == @user.id %>
+23:      <h2>Your friends:</h2>
+24:      <% @user.friends.each do |friend| %>
+25:        <p><%= link_to friend.to_string, friend %></p>
+26:      <% end %>
+27:      <h2>Your friend requests:</h2>
+28:      <% @user.friend_requests.each do |request| %>
+29:        <p>
+30:          <%= request.sender.to_string %>
+31:          <%= button_to "Accept friend request", {:controller => "user", 
+32:                                                  :action => "accept_friend", 
+33:                                                  :sender => request.sender.id},
+34:                                                  :method => "get"} %>
+35:        </p>
+36:      <% end %>
+37:    <% end %>
+38:    
+39:    <% if @session_user.id == @user.id %>
+40:      <%= link_to 'New Post', new_post_path %> |
+41:      <%= link_to 'Edit Profile', edit_user_path(@user) %> |
+42:      <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %> |
+43:    <% elsif !@session_user.friends.include?(@user) %>
+44:      <%= link_to "Add Friend", add_friend_users_path %>|
+45:    <% end %>
+46:    <% if @session_user.id != @user.id %>
+47:      <%= link_to "My Profile", @session_user %> |
+48:    <% end %>
+49:    <%= link_to "Home Page", users_path %> |
+50:    <%= link_to "Log out", logout_path %>
+  
+app/views/users/show.html.erb:34: syntax error, unexpected tSTRING_DEND, expecting ')'
+app/views/users/show.html.erb:36: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:42: syntax error, unexpected tSTRING_DEND, expecting '}'
+app/views/users/show.html.erb:43: syntax error, unexpected elsif, expecting ')'
+app/views/users/show.html.erb:45: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:53: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:34: syntax error, unexpected tSTRING_DEND, expecting ')'
+app/views/users/show.html.erb:36: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:42: syntax error, unexpected tSTRING_DEND, expecting '}'
+app/views/users/show.html.erb:43: syntax error, unexpected elsif, expecting ')'
+app/views/users/show.html.erb:45: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:53: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:34: syntax error, unexpected tSTRING_DEND, expecting ')'
+app/views/users/show.html.erb:36: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:42: syntax error, unexpected tSTRING_DEND, expecting '}'
+app/views/users/show.html.erb:43: syntax error, unexpected elsif, expecting ')'
+app/views/users/show.html.erb:45: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:53: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:34: syntax error, unexpected tSTRING_DEND, expecting ')'
+app/views/users/show.html.erb:36: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:42: syntax error, unexpected tSTRING_DEND, expecting '}'
+app/views/users/show.html.erb:43: syntax error, unexpected elsif, expecting ')'
+app/views/users/show.html.erb:45: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:53: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:34: syntax error, unexpected tSTRING_DEND, expecting ')'
+app/views/users/show.html.erb:36: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:42: syntax error, unexpected tSTRING_DEND, expecting '}'
+app/views/users/show.html.erb:43: syntax error, unexpected elsif, expecting ')'
+app/views/users/show.html.erb:45: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:53: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:34: syntax error, unexpected tSTRING_DEND, expecting ')'
+app/views/users/show.html.erb:36: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:42: syntax error, unexpected tSTRING_DEND, expecting '}'
+app/views/users/show.html.erb:43: syntax error, unexpected elsif, expecting ')'
+app/views/users/show.html.erb:45: syntax error, unexpected end, expecting ')'
+app/views/users/show.html.erb:53: syntax error, unexpected end, expecting ')'
+Started GET "/users/8" for ::1 at 2019-09-25 12:25:30 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:92:in `set_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:98:in `set_session_user'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mFriendRequest Load (0.2ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/views/users/show.html.erb:28
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:30
+  Rendered users/show.html.erb within layouts/application (Duration: 21.8ms | Allocations: 9395)
+Completed 500 Internal Server Error in 34ms (ActiveRecord: 1.1ms | Allocations: 13066)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"accept_friend", :controller=>"user", :id=>"8", :method=>"get", :sender=>6}):
+    28:   <% @user.friend_requests.each do |request| %>
+    29:     <p>
+    30:       <%= request.sender.to_string %>
+    31:       <%= button_to "Accept friend request", {:controller => "user", 
+    32:                                               :action => "accept_friend", 
+    33:                                               :sender => request.sender.id,
+    34:                                               :method => "get"} %>
+  
+app/views/users/show.html.erb:31
+app/views/users/show.html.erb:28
+Started GET "/users/8" for ::1 at 2019-09-25 12:26:54 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:92:in `set_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:98:in `set_session_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mFriendRequest Load (0.2ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/views/users/show.html.erb:28
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:30
+  Rendered users/show.html.erb within layouts/application (Duration: 445.7ms | Allocations: 151105)
+Completed 500 Internal Server Error in 457ms (ActiveRecord: 1.0ms | Allocations: 154778)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `accept_friend_user_path' for #<#<Class:0x00007fd90bc49f50>:0x00007fd90bacb6d8>
+Did you mean?  accept_friend_users_path
+               accept_friend_users_url
+               add_friend_users_path):
+    28:   <% @user.friend_requests.each do |request| %>
+    29:     <p>
+    30:       <%= request.sender.to_string %>
+    31:       <%= button_to "Accept friend request", accept_friend_user_path, :method => "get" %>
+    32:     </p>
+    33:   <% end %>
+    34: <% end %>
+  
+app/views/users/show.html.erb:31
+app/views/users/show.html.erb:28
+Started GET "/users/8" for ::1 at 2019-09-25 12:27:05 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:92:in `set_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:98:in `set_session_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.8ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mFriendRequest Load (0.2ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/views/users/show.html.erb:28
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:30
+  Rendered users/show.html.erb within layouts/application (Duration: 5.0ms | Allocations: 2310)
+Completed 200 OK in 99ms (Views: 20.8ms | ActiveRecord: 1.5ms | Allocations: 14068)
+
+
+Started GET "/users/accept_friend" for ::1 at 2019-09-25 12:27:06 -0500
+Processing by UsersController#accept_friend_request as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:98:in `set_session_user'
+Completed 404 Not Found in 5ms (ActiveRecord: 0.9ms | Allocations: 1168)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  
+app/controllers/users_controller.rb:82:in `accept_friend_request'
+Started GET "/users/accept_friend" for ::1 at 2019-09-25 12:27:37 -0500
+Processing by UsersController#accept_friend_request as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:98:in `set_session_user'
+Completed 404 Not Found in 3ms (ActiveRecord: 0.3ms | Allocations: 1167)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  
+app/controllers/users_controller.rb:82:in `accept_friend_request'
+Started PUT "/__web_console/repl_sessions/f41c9e0b68fe124ccfb33a9dd7263d6a" for ::1 at 2019-09-25 12:27:42 -0500
+Started PUT "/__web_console/repl_sessions/f41c9e0b68fe124ccfb33a9dd7263d6a" for ::1 at 2019-09-25 12:27:43 -0500
+Started GET "/users/8" for ::1 at 2019-09-25 12:28:46 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:92:in `set_user'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:98:in `set_session_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mFriendRequest Load (0.1ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/views/users/show.html.erb:28
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:30
+  Rendered users/show.html.erb within layouts/application (Duration: 4.4ms | Allocations: 2330)
+Completed 200 OK in 31ms (Views: 19.8ms | ActiveRecord: 1.4ms | Allocations: 14091)
+
+
+Started GET "/users/accept_friend" for ::1 at 2019-09-25 12:28:47 -0500
+Processing by UsersController#accept_friend_request as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:98:in `set_session_user'
+Completed 404 Not Found in 3ms (ActiveRecord: 0.2ms | Allocations: 1158)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  
+app/controllers/users_controller.rb:82:in `accept_friend_request'
+Started PUT "/__web_console/repl_sessions/c4403b8a2a3c63475b2969c76ca84090" for ::1 at 2019-09-25 12:28:56 -0500
+Started PUT "/__web_console/repl_sessions/c4403b8a2a3c63475b2969c76ca84090" for ::1 at 2019-09-25 12:28:56 -0500
+Started GET "/users/accept_friend" for ::1 at 2019-09-25 12:29:11 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#accept_friend_request as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:98:in `set_session_user'
+Completed 404 Not Found in 18ms (ActiveRecord: 1.2ms | Allocations: 8811)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  
+app/controllers/users_controller.rb:82:in `accept_friend_request'
+Started GET "/users/8" for ::1 at 2019-09-25 12:33:01 -0500
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:92:in `set_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:98:in `set_session_user'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mFriendRequest Load (0.1ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/views/users/show.html.erb:28
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:30
+  Rendered users/show.html.erb within layouts/application (Duration: 12.9ms | Allocations: 6180)
+Completed 200 OK in 55ms (Views: 28.2ms | ActiveRecord: 3.2ms | Allocations: 27736)
+
+
+Started GET "/users/accept_friend?sender_id=6" for ::1 at 2019-09-25 12:33:02 -0500
+Processing by UsersController#accept_friend_request as HTML
+  Parameters: {"sender_id"=>"6"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:98:in `set_session_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:82:in `accept_friend_request'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:83:in `accept_friend_request'
+  [1m[36mUser::HABTM_Friends Create (0.3ms)[0m  [1m[32mINSERT INTO "friends" ("user_a_id", "user_b_id") VALUES (?, ?)[0m  [["user_a_id", 8], ["user_b_id", 6]]
+  ↳ app/controllers/users_controller.rb:83:in `accept_friend_request'
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:83:in `accept_friend_request'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:84:in `accept_friend_request'
+  [1m[36mUser::HABTM_Friends Create (0.7ms)[0m  [1m[32mINSERT INTO "friends" ("user_a_id", "user_b_id") VALUES (?, ?)[0m  [["user_a_id", 6], ["user_b_id", 8]]
+  ↳ app/controllers/users_controller.rb:84:in `accept_friend_request'
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:84:in `accept_friend_request'
+  [1m[36mFriendRequest Load (0.7ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ? LIMIT ?[0m  [["user_id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:85:in `accept_friend_request'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:85:in `accept_friend_request'
+  [1m[36mFriendRequest Destroy (0.4ms)[0m  [1m[31mDELETE FROM "friend_requests" WHERE "friend_requests"."id" = ?[0m  [["id", 2]]
+  ↳ app/controllers/users_controller.rb:85:in `accept_friend_request'
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:85:in `accept_friend_request'
+Redirected to http://localhost:3000/users/8
+Completed 302 Found in 35ms (ActiveRecord: 6.5ms | Allocations: 10543)
+
+
+Started GET "/users/8" for ::1 at 2019-09-25 12:33:02 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:92:in `set_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:98:in `set_session_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 6]]
+  ↳ app/controllers/users_controller.rb:14:in `flatten'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mFriendRequest Load (0.7ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/views/users/show.html.erb:28
+  Rendered users/show.html.erb within layouts/application (Duration: 6.1ms | Allocations: 949)
+Completed 200 OK in 32ms (Views: 19.8ms | ActiveRecord: 1.6ms | Allocations: 16223)
+
+
+Started GET "/users" for ::1 at 2019-09-25 12:33:24 -0500
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:98:in `set_session_user'
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:5
+  Rendered users/index.html.erb within layouts/application (Duration: 4.0ms | Allocations: 1046)
+Completed 200 OK in 28ms (Views: 24.0ms | ActiveRecord: 0.5ms | Allocations: 10064)
+
+
+Started GET "/users/4" for ::1 at 2019-09-25 12:33:25 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:92:in `set_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:98:in `set_session_user'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 4]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 6]]
+  ↳ app/controllers/users_controller.rb:14:in `flatten'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 4]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ? AND "users"."id" = ? LIMIT ?[0m  [["user_a_id", 8], ["id", 4], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:40
+  Rendered users/show.html.erb within layouts/application (Duration: 5.7ms | Allocations: 1221)
+Completed 200 OK in 41ms (Views: 26.5ms | ActiveRecord: 1.3ms | Allocations: 12797)
+
+
+Started GET "/users/add_friend/4" for ::1 at 2019-09-25 12:33:27 -0500
+Processing by UsersController#send_friend_request as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:92:in `set_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:98:in `set_session_user'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:77:in `send_friend_request'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:77:in `send_friend_request'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:77:in `send_friend_request'
+  [1m[36mFriendRequest Create (0.5ms)[0m  [1m[32mINSERT INTO "friend_requests" ("sender_id", "user_id") VALUES (?, ?)[0m  [["sender_id", 8], ["user_id", 4]]
+  ↳ app/controllers/users_controller.rb:77:in `send_friend_request'
+  [1m[35m (1.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:77:in `send_friend_request'
+Redirected to http://localhost:3000/users/8
+Completed 302 Found in 84ms (ActiveRecord: 3.1ms | Allocations: 5586)
+
+
+Started GET "/users/8" for ::1 at 2019-09-25 12:33:28 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:92:in `set_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:98:in `set_session_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 6]]
+  ↳ app/controllers/users_controller.rb:14:in `flatten'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mFriendRequest Load (0.1ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/views/users/show.html.erb:28
+  Rendered users/show.html.erb within layouts/application (Duration: 1.7ms | Allocations: 936)
+Completed 200 OK in 18ms (Views: 10.4ms | ActiveRecord: 0.8ms | Allocations: 12474)
+
+
+Started GET "/logout" for ::1 at 2019-09-25 12:33:30 -0500
+Processing by SessionsController#destroy as HTML
+Redirected to http://localhost:3000/
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms | Allocations: 372)
+
+
+Started GET "/" for ::1 at 2019-09-25 12:33:30 -0500
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 2.7ms | Allocations: 393)
+Completed 200 OK in 32ms (Views: 29.7ms | ActiveRecord: 0.0ms | Allocations: 9352)
+
+
+Started GET "/login" for ::1 at 2019-09-25 12:33:31 -0500
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 3.1ms | Allocations: 2217)
+Completed 200 OK in 20ms (Views: 18.3ms | ActiveRecord: 0.0ms | Allocations: 11083)
+
+
+Started POST "/sessions" for ::1 at 2019-09-25 12:33:36 -0500
+Processing by SessionsController#create as JS
+  Parameters: {"authenticity_token"=>"VQeZhk4HE5dvuzhVlZjxMFD+kvLi1k5EcwRjzstoXqEJDhYqTgxWsTjPsy5+VhJfZ/zBeaEVbhjLtUF1a2WfZA==", "user_name"=>"jgansukh", "password"=>"[FILTERED]", "commit"=>"Log in"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."user_name" = ? LIMIT ?[0m  [["user_name", "jgansukh"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:6:in `create'
+Redirected to http://localhost:3000/users/4
+Completed 200 OK in 272ms (ActiveRecord: 0.2ms | Allocations: 1205)
+
+
+Started GET "/users/4" for ::1 at 2019-09-25 12:33:36 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:92:in `set_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:98:in `set_session_user'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 4]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 6]]
+  ↳ app/controllers/users_controller.rb:14:in `flatten'
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 4]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mFriendRequest Load (0.2ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ?[0m  [["user_id", 4]]
+  ↳ app/views/users/show.html.erb:28
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/views/users/show.html.erb:30
+  Rendered users/show.html.erb within layouts/application (Duration: 11.2ms | Allocations: 1984)
+Completed 200 OK in 45ms (Views: 30.3ms | ActiveRecord: 1.5ms | Allocations: 13581)
+
+
+Started GET "/users/accept_friend?sender_id=8" for ::1 at 2019-09-25 12:33:41 -0500
+Processing by UsersController#accept_friend_request as HTML
+  Parameters: {"sender_id"=>"8"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:98:in `set_session_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:82:in `accept_friend_request'
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:83:in `accept_friend_request'
+  [1m[36mUser::HABTM_Friends Create (0.6ms)[0m  [1m[32mINSERT INTO "friends" ("user_a_id", "user_b_id") VALUES (?, ?)[0m  [["user_a_id", 4], ["user_b_id", 8]]
+  ↳ app/controllers/users_controller.rb:83:in `accept_friend_request'
+  [1m[35m (1.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:83:in `accept_friend_request'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:84:in `accept_friend_request'
+  [1m[36mUser::HABTM_Friends Create (0.4ms)[0m  [1m[32mINSERT INTO "friends" ("user_a_id", "user_b_id") VALUES (?, ?)[0m  [["user_a_id", 8], ["user_b_id", 4]]
+  ↳ app/controllers/users_controller.rb:84:in `accept_friend_request'
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:84:in `accept_friend_request'
+  [1m[36mFriendRequest Load (0.1ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ? LIMIT ?[0m  [["user_id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:85:in `accept_friend_request'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:85:in `accept_friend_request'
+  [1m[36mFriendRequest Destroy (0.5ms)[0m  [1m[31mDELETE FROM "friend_requests" WHERE "friend_requests"."id" = ?[0m  [["id", 4]]
+  ↳ app/controllers/users_controller.rb:85:in `accept_friend_request'
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:85:in `accept_friend_request'
+Redirected to http://localhost:3000/users/4
+Completed 302 Found in 28ms (ActiveRecord: 5.7ms | Allocations: 8977)
+
+
+Started GET "/users/4" for ::1 at 2019-09-25 12:33:41 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:92:in `set_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:98:in `set_session_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 4]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 6]]
+  ↳ app/controllers/users_controller.rb:14:in `flatten'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `flatten'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 4]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mFriendRequest Load (0.1ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ?[0m  [["user_id", 4]]
+  ↳ app/views/users/show.html.erb:28
+  Rendered users/show.html.erb within layouts/application (Duration: 2.1ms | Allocations: 1174)
+Completed 200 OK in 27ms (Views: 16.3ms | ActiveRecord: 1.2ms | Allocations: 13396)
+
+
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mFriendRequest Load (0.4ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mFriendRequest Load (0.2ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" ORDER BY "friend_requests"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFriendRequest Destroy (2.8ms)[0m  [1m[31mDELETE FROM "friend_requests" WHERE "friend_requests"."id" = ?[0m  [["id", 1]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mFriendRequest Load (0.2ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mFriendRequest Load (0.2ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" ORDER BY "friend_requests"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFriendRequest Destroy (0.4ms)[0m  [1m[31mDELETE FROM "friend_requests" WHERE "friend_requests"."id" = ?[0m  [["id", 3]]
+  [1m[35m (1.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mFriendRequest Load (0.2ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" LIMIT ?[0m  [["LIMIT", 11]]
