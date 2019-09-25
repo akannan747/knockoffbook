@@ -82,7 +82,7 @@ class UsersController < ApplicationController
     sender = User.find(params[:sender_id])
     @session_user.friends << sender
     sender.friends << @session_user
-    FriendRequest.find_by(user_id: @session_user.id).destroy
+    FriendRequest.find_by(sender_id: params[:sender_id]).destroy
     redirect_to @session_user, notice: 'Friend request accepted!'
   end
 

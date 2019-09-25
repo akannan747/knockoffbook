@@ -8553,3 +8553,15 @@ Processing by UsersController#show as HTML
 Completed 200 OK in 27ms (Views: 16.3ms | ActiveRecord: 1.2ms | Allocations: 13396)
 
 
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mFriendRequest Load (0.4ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mFriendRequest Load (0.2ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" ORDER BY "friend_requests"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFriendRequest Destroy (2.8ms)[0m  [1m[31mDELETE FROM "friend_requests" WHERE "friend_requests"."id" = ?[0m  [["id", 1]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mFriendRequest Load (0.2ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mFriendRequest Load (0.2ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" ORDER BY "friend_requests"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFriendRequest Destroy (0.4ms)[0m  [1m[31mDELETE FROM "friend_requests" WHERE "friend_requests"."id" = ?[0m  [["id", 3]]
+  [1m[35m (1.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mFriendRequest Load (0.2ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" LIMIT ?[0m  [["LIMIT", 11]]
