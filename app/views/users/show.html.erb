@@ -26,7 +26,10 @@
   <% end %>
   <h2>Your friend requests:</h2>
   <% @user.friend_requests.each do |request| %>
-    <p><%= request.sender.to_string %></p>
+    <p>
+      <%= request.sender.to_string %>
+      <%= button_to "Accept friend request", accept_friend_users_path, :method => "get", params: {sender_id: request.sender.id} %>
+    </p>
   <% end %>
 <% end %>
 

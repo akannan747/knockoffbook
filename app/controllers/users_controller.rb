@@ -78,6 +78,14 @@ class UsersController < ApplicationController
     redirect_to @session_user, notice: 'Friend request sent!'
   end
 
+  def accept_friend_request
+    sender = User.find(params[:sender_id])
+    @session_user.friends << sender
+    sender.friends << @session_user
+    FriendRequest.find_by(user_id: @session_user.id).destroy
+    redirect_to @session_user, notice: 'Friend request accepted!'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
