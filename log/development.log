@@ -8570,3 +8570,112 @@ Completed 200 OK in 27ms (Views: 16.3ms | ActiveRecord: 1.2ms | Allocations: 133
   [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
   [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
   [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2019-09-25 14:40:57 -0500
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6:in `current_user'
+  Rendered home/index.html.erb within layouts/application (Duration: 40.9ms | Allocations: 10729)
+Completed 200 OK in 1542ms (Views: 1533.0ms | ActiveRecord: 1.2ms | Allocations: 1351057)
+
+
+Started GET "/logout" for ::1 at 2019-09-25 14:41:01 -0500
+Processing by SessionsController#destroy as HTML
+Redirected to http://localhost:3000/
+Completed 302 Found in 4ms (ActiveRecord: 0.0ms | Allocations: 399)
+
+
+Started GET "/" for ::1 at 2019-09-25 14:41:01 -0500
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 1.2ms | Allocations: 148)
+Completed 200 OK in 18ms (Views: 16.1ms | ActiveRecord: 0.0ms | Allocations: 8553)
+
+
+Started GET "/login" for ::1 at 2019-09-25 14:41:03 -0500
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 19.1ms | Allocations: 3744)
+Completed 200 OK in 64ms (Views: 57.7ms | ActiveRecord: 0.0ms | Allocations: 12632)
+
+
+Started POST "/sessions" for ::1 at 2019-09-25 14:41:06 -0500
+Processing by SessionsController#create as JS
+  Parameters: {"authenticity_token"=>"xwYP5SHVXMsR9Mh3oEBtO14igQdlApjijz16x5el4v6bD4BJId4Z7UaAQwxLjo5UaSDSjCbBuL43jFh8N6gjOw==", "user_name"=>"andrew", "password"=>"[FILTERED]", "commit"=>"Log in"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."user_name" = ? LIMIT ?[0m  [["user_name", "andrew"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:6:in `create'
+Redirected to http://localhost:3000/users/6
+Completed 200 OK in 267ms (ActiveRecord: 0.7ms | Allocations: 1360)
+
+
+Started GET "/users/6" for ::1 at 2019-09-25 14:41:06 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:92:in `set_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:98:in `set_session_user'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 6]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 4]]
+  ↳ app/controllers/users_controller.rb:14:in `flatten'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `flatten'
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 6]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mFriendRequest Load (1.3ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ?[0m  [["user_id", 6]]
+  ↳ app/views/users/show.html.erb:28
+  Rendered users/show.html.erb within layouts/application (Duration: 25.5ms | Allocations: 5806)
+Completed 200 OK in 128ms (Views: 44.3ms | ActiveRecord: 4.6ms | Allocations: 27171)
+
+
+Started GET "/posts/new" for ::1 at 2019-09-25 14:41:15 -0500
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_form.html.erb (Duration: 3.6ms | Allocations: 1256)
+  Rendered posts/new.html.erb within layouts/application (Duration: 5.8ms | Allocations: 1614)
+Completed 200 OK in 85ms (Views: 80.4ms | ActiveRecord: 0.0ms | Allocations: 10698)
+
+
+Started POST "/posts" for ::1 at 2019-09-25 14:41:23 -0500
+Processing by PostsController#create as HTML
+  Parameters: {"authenticity_token"=>"1NwY1di54FO1YohPMfopwGOALJtJ2M5cqGykqVO027777W0bMZ8LtMQ04PFZ4AIE6EiFy7fqAHCTWP3zBm2BzA==", "post"=>{"title"=>"checking timestamps", "content"=>"timestamp? "}, "commit"=>"Create Post"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:74:in `get_user'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:27:in `block in create'
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:27:in `block in create'
+  [1m[36mPost Create (1.2ms)[0m  [1m[32mINSERT INTO "posts" ("title", "content", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)[0m  [["title", "checking timestamps"], ["content", "timestamp? "], ["created_at", "2019-09-25 19:41:23.169909"], ["updated_at", "2019-09-25 19:41:23.169909"], ["user_id", 6]]
+  ↳ app/controllers/posts_controller.rb:27:in `block in create'
+  [1m[35m (2.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/posts_controller.rb:27:in `block in create'
+Redirected to http://localhost:3000/users/6
+Completed 302 Found in 27ms (ActiveRecord: 4.1ms | Allocations: 4392)
+
+
+Started GET "/users/6" for ::1 at 2019-09-25 14:41:23 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:92:in `set_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:98:in `set_session_user'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friends" ON "users"."id" = "friends"."user_b_id" WHERE "friends"."user_a_id" = ?[0m  [["user_a_id", 6]]
+  ↳ app/controllers/users_controller.rb:14:in `map'
+  [1m[36mPost Load (0.7ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 4]]
+  ↳ app/controllers/users_controller.rb:14:in `flatten'
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 8]]
+  ↳ app/controllers/users_controller.rb:14:in `flatten'
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."user_id" = ?[0m  [["user_id", 6]]
+  ↳ app/controllers/users_controller.rb:14:in `show'
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mFriendRequest Load (0.3ms)[0m  [1m[34mSELECT "friend_requests".* FROM "friend_requests" WHERE "friend_requests"."user_id" = ?[0m  [["user_id", 6]]
+  ↳ app/views/users/show.html.erb:28
+  Rendered users/show.html.erb within layouts/application (Duration: 6.6ms | Allocations: 1389)
+Completed 200 OK in 45ms (Views: 22.7ms | ActiveRecord: 2.5ms | Allocations: 13668)
+
+

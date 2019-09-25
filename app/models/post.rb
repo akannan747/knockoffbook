@@ -6,6 +6,8 @@ class Post < ApplicationRecord
   end
 
   def created_at_string
-    "#{self.created_at.strftime('%B %e, %Y')} at #{self.created_at.strftime('%l:%M %P')}"
+    zone = ActiveSupport::TimeZone.new("Central Time (US & Canada)")
+    zoned_time = self.created_at.in_time_zone(zone)
+    "#{zoned_time.strftime('%B %e, %Y')} at #{zoned_time.strftime('%l:%M %P')}"
   end
 end
